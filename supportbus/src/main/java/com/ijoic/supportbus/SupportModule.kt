@@ -17,10 +17,10 @@
  */
 package com.ijoic.supportbus
 
-import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.content.Context
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 
 /**
  * Support module.
@@ -42,7 +42,7 @@ interface SupportModule {
    * @param activity activity.
    * @param lifecycle lifecycle.
    */
-  fun onActivityInit(activity: Activity, lifecycle: Lifecycle)
+  fun onActivityInit(activity: FragmentActivity, lifecycle: Lifecycle)
 
   /**
    * Fragment init.
