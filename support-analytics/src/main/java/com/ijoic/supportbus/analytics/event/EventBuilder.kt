@@ -47,4 +47,18 @@ class EventBuilder internal constructor(
   fun apply() {
     analytics.onEvent(event, params)
   }
+
+  /**
+   * Apply with single key value parameters.
+   *
+   * @param key param key.
+   * @param value param value.
+   */
+  fun applySimple(key: String, value: String) {
+    if (!params.isEmpty()) {
+      params.clear()
+    }
+    params[key] = value
+    analytics.onEvent(event, params)
+  }
 }
