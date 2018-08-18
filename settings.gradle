@@ -1,1 +1,1 @@
-include ':app', ':supportbus'
+include ':app', ':supportbus', ':support-analytics'
