@@ -29,7 +29,7 @@ import java.util.*
 internal object AnalyticsFactory {
 
   private val analyticsCache by lazy { WeakHashMap<Context, Analytics>() }
-  private var creator: ((Context) -> Analytics)? = null
+  private var creatorItems = mutableSetOf<(Context) -> Analytics>()
 
   /**
    * Register analytics creator.
@@ -37,7 +37,7 @@ internal object AnalyticsFactory {
    * @param creator analytics creator.
    */
   internal fun register(creator: (Context) -> Analytics) {
-    this.creator = creator
+    creatorItems.add(creator)
   }
 
   /**
@@ -47,13 +47,20 @@ internal object AnalyticsFactory {
    */
   internal fun getAnalytics(context: Context): Analytics {
     var instance = analyticsCache[context]
+    val creatorItems = this.creatorItems
 
-    if (instance == null) {
-      instance = creator?.invoke(context.applicationContext)
+    if (instance == null && !creatorItems.isEmpty()) {
+      val appContext = context.applicationContext
 
-      if (instance != null) {
-        analyticsCache[context] = instance
+      instance = if (creatorItems.size == 1) {
+        creatorItems.first().invoke(appContext)
+      } else {
+        WrapListAnalytics(
+            creatorItems.map { it.invoke(appContext) }
+        )
       }
+
+      analyticsCache[context] = instance
     }
     return instance ?: EmptyAnalytics
   }
@@ -64,6 +71,16 @@ internal object AnalyticsFactory {
   private object EmptyAnalytics: Analytics {
     override fun onEvent(eventId: String, params: Map<String, String>?, extras: Map<String, String>?) {
       // do nothing.
+    }
+  }
+
+  private class WrapListAnalytics(private val items: List<Analytics>): Analytics {
+    override fun onEvent(category: String, action: String, name: String, params: Map<String, String>?) {
+      items.forEach { it.onEvent(category, action, name, params) }
+    }
+
+    override fun onEvent(eventId: String, params: Map<String, String>?, extras: Map<String, String>?) {
+      items.forEach { it.onEvent(eventId, params, extras) }
     }
   }
 
