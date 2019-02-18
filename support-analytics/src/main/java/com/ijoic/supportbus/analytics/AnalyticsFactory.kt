@@ -62,7 +62,7 @@ internal object AnalyticsFactory {
    * Empty analytics.
    */
   private object EmptyAnalytics: Analytics {
-    override fun onEvent(tag: String, params: Map<String, String>?) {
+    override fun onEvent(eventId: String, params: Map<String, String>?, extras: Map<String, String>?) {
       // do nothing.
     }
   }

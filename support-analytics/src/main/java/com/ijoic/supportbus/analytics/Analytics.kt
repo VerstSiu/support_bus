@@ -27,12 +27,23 @@ import com.ijoic.supportbus.analytics.event.EventBuilder
  */
 interface Analytics {
   /**
-   * Event triggered.
-   *
-   * @param event event name.
-   * @param params event parameters.
+   * Event triggered with [category], [action], [name] and [params]
    */
-  fun onEvent(event: String, params: Map<String, String>? = null)
+  fun onEvent(category: String, action: String, name: String, params: Map<String, String>? = null) {
+    val eventId = "${category}_$action"
+    val extras = mapOf(
+        EXTRA_CATEGORY to category,
+        EXTRA_ACTION to action,
+        EXTRA_NAME to name
+    )
+
+    this.onEvent(eventId, params, extras)
+  }
+
+  /**
+   * Event triggered with [eventId], [params] and [extras]
+   */
+  fun onEvent(eventId: String, params: Map<String, String>? = null, extras: Map<String, String>? = null)
 
   /**
    * Edit event.
@@ -41,5 +52,11 @@ interface Analytics {
    */
   fun editEvent(event: String): EventBuilder {
     return EventBuilder(this, event)
+  }
+
+  companion object {
+    const val EXTRA_CATEGORY = "category"
+    const val EXTRA_ACTION = "action"
+    const val EXTRA_NAME = "name"
   }
 }
