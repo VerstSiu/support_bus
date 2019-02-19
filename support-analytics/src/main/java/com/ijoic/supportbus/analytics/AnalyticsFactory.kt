@@ -75,7 +75,7 @@ internal object AnalyticsFactory {
   }
 
   private class WrapListAnalytics(private val items: List<Analytics>): Analytics {
-    override fun onEvent(category: String, action: String, name: String, params: Map<String, String>?) {
+    override fun onEvent(category: String, action: String, name: String?, params: Map<String, String>?) {
       items.forEach { it.onEvent(category, action, name, params) }
     }
 

@@ -29,11 +29,14 @@ interface Analytics {
   /**
    * Event triggered with [category], [action], [name] and [params]
    */
-  fun onEvent(category: String, action: String, name: String, params: Map<String, String>? = null) {
-    val extras = mapOf(
-        PARAM_ACTION to action,
-        PARAM_NAME to name
-    )
+  fun onEvent(category: String, action: String, name: String? = null, params: Map<String, String>? = null) {
+    val extras = mutableMapOf<String, String>().apply {
+      put(PARAM_ACTION, action)
+
+      if (name != null) {
+        put(PARAM_NAME, name)
+      }
+    }
 
     if (params == null || params.isEmpty()) {
       this.onEvent(category, extras)
