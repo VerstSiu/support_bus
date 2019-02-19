@@ -30,20 +30,22 @@ interface Analytics {
    * Event triggered with [category], [action], [name] and [params]
    */
   fun onEvent(category: String, action: String, name: String, params: Map<String, String>? = null) {
-    val eventId = "${category}_$action"
     val extras = mapOf(
-        EXTRA_CATEGORY to category,
-        EXTRA_ACTION to action,
-        EXTRA_NAME to name
+        PARAM_ACTION to action,
+        PARAM_NAME to name
     )
 
-    this.onEvent(eventId, params, extras)
+    if (params == null || params.isEmpty()) {
+      this.onEvent(category, extras)
+    } else {
+      this.onEvent(category, params.toMutableMap().apply { putAll(extras) })
+    }
   }
 
   /**
-   * Event triggered with [eventId], [params] and [extras]
+   * Event triggered with [event], [params]
    */
-  fun onEvent(eventId: String, params: Map<String, String>? = null, extras: Map<String, String>? = null)
+  fun onEvent(event: String, params: Map<String, String>? = null)
 
   /**
    * Edit event.
@@ -55,8 +57,7 @@ interface Analytics {
   }
 
   companion object {
-    const val EXTRA_CATEGORY = "category"
-    const val EXTRA_ACTION = "action"
-    const val EXTRA_NAME = "name"
+    const val PARAM_ACTION = "action"
+    const val PARAM_NAME = "name"
   }
 }
