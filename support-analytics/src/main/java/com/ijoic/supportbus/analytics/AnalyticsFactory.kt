@@ -69,7 +69,7 @@ internal object AnalyticsFactory {
    * Empty analytics.
    */
   private object EmptyAnalytics: Analytics {
-    override fun onEvent(eventId: String, params: Map<String, String>?, extras: Map<String, String>?) {
+    override fun onEvent(event: String, params: Map<String, String>?) {
       // do nothing.
     }
   }
@@ -79,8 +79,8 @@ internal object AnalyticsFactory {
       items.forEach { it.onEvent(category, action, name, params) }
     }
 
-    override fun onEvent(eventId: String, params: Map<String, String>?, extras: Map<String, String>?) {
-      items.forEach { it.onEvent(eventId, params, extras) }
+    override fun onEvent(event: String, params: Map<String, String>?) {
+      items.forEach { it.onEvent(event, params) }
     }
   }
 
