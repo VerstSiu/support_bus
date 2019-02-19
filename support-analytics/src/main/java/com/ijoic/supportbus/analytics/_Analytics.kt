@@ -21,6 +21,7 @@
 package com.ijoic.supportbus.analytics
 
 import android.content.Context
+import android.support.v4.app.Fragment
 
 /**
  * Analytics instance.
@@ -29,3 +30,11 @@ import android.content.Context
  */
 val Context.analytics: Analytics
   get() = AnalyticsFactory.getAnalytics(this)
+
+/**
+ * Analytics instance
+ *
+ * @since 1.1
+ */
+val Fragment.analytics: Analytics?
+  get() = context?.analytics
