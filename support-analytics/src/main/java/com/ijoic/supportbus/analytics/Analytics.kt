@@ -17,8 +17,6 @@
  */
 package com.ijoic.supportbus.analytics
 
-import com.ijoic.supportbus.analytics.event.EventBuilder
-
 /**
  * Analytics.
  *
@@ -27,40 +25,12 @@ import com.ijoic.supportbus.analytics.event.EventBuilder
  */
 interface Analytics {
   /**
-   * Event triggered with [category], [action], [name] and [params]
+   * Normal event with event [name] and [params]
    */
-  fun onEvent(category: String, action: String, name: String? = null, params: Map<String, String>? = null) {
-    val extras = mutableMapOf<String, String>().apply {
-      put(PARAM_ACTION, action)
-
-      if (name != null) {
-        put(PARAM_NAME, name)
-      }
-    }
-
-    if (params == null || params.isEmpty()) {
-      this.onEvent(category, extras)
-    } else {
-      this.onEvent(category, params.toMutableMap().apply { putAll(extras) })
-    }
-  }
+  fun onEvent(name: String, params: Map<String, String>? = null)
 
   /**
-   * Event triggered with [event], [params]
+   * Screen event with [path], [title] and [params]
    */
-  fun onEvent(event: String, params: Map<String, String>? = null)
-
-  /**
-   * Edit event.
-   *
-   * @param event event name.
-   */
-  fun editEvent(event: String): EventBuilder {
-    return EventBuilder(this, event)
-  }
-
-  companion object {
-    const val PARAM_ACTION = "action"
-    const val PARAM_NAME = "name"
-  }
+  fun onScreen(path: String, title: String, params: Map<String, String>? = null)
 }

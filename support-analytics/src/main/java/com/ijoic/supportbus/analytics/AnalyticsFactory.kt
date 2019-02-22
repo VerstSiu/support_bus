@@ -62,25 +62,29 @@ internal object AnalyticsFactory {
 
       analyticsCache[context] = instance
     }
-    return instance ?: EmptyAnalytics
+    return instance ?: BlankAnalytics
   }
 
   /**
-   * Empty analytics.
+   * Blank analytics.
    */
-  private object EmptyAnalytics: Analytics {
-    override fun onEvent(event: String, params: Map<String, String>?) {
+  private object BlankAnalytics: Analytics {
+    override fun onEvent(name: String, params: Map<String, String>?) {
+      // do nothing.
+    }
+
+    override fun onScreen(path: String, title: String, params: Map<String, String>?) {
       // do nothing.
     }
   }
 
   private class WrapListAnalytics(private val items: List<Analytics>): Analytics {
-    override fun onEvent(category: String, action: String, name: String?, params: Map<String, String>?) {
-      items.forEach { it.onEvent(category, action, name, params) }
+    override fun onEvent(name: String, params: Map<String, String>?) {
+      items.forEach { it.onEvent(name, params) }
     }
 
-    override fun onEvent(event: String, params: Map<String, String>?) {
-      items.forEach { it.onEvent(event, params) }
+    override fun onScreen(path: String, title: String, params: Map<String, String>?) {
+      items.forEach { it.onScreen(path, title, params) }
     }
   }
 
