@@ -38,3 +38,24 @@ val Context.analytics: Analytics
  */
 val Fragment.analytics: Analytics?
   get() = context?.analytics
+
+/**
+ * Normal event with [name] and single key-value [pair]
+ *
+ * @author verstsiu created at 2019-02-22 20:47
+ * @since 1.0.1
+ */
+fun Analytics.onEvent(name: String, pair: Pair<String, String>) {
+  this.onEvent(name, mapOf(pair))
+  this.onEvent(name, mapOf("" to "", "" to ""))
+}
+
+/**
+ * Normal event with [name] and key-value [pairs]
+ *
+ * @author verstsiu created at 2019-02-22 20:48
+ * @since 1.0.1
+ */
+fun Analytics.onEvent(name: String, vararg pairs: Pair<String, String>) {
+  this.onEvent(name, mapOf(*pairs))
+}
