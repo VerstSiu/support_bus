@@ -17,6 +17,8 @@
  */
 package com.ijoic.supportbus.analytics
 
+import android.app.Activity
+
 /**
  * Analytics.
  *
@@ -30,7 +32,7 @@ interface Analytics {
   fun onEvent(name: String, params: Map<String, String>? = null)
 
   /**
-   * Screen event with [path], [title] and [params]
+   * Screen event with [activity], [path], [title] and [params]
    */
-  fun onScreen(path: String, title: String, params: Map<String, String>? = null)
+  fun onScreen(activity: Activity, path: String, title: String? = null, params: Map<String, String>? = null)
 }

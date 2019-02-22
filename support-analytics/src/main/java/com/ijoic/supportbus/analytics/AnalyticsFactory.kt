@@ -17,6 +17,7 @@
  */
 package com.ijoic.supportbus.analytics
 
+import android.app.Activity
 import android.content.Context
 import java.util.*
 
@@ -73,7 +74,7 @@ internal object AnalyticsFactory {
       // do nothing.
     }
 
-    override fun onScreen(path: String, title: String, params: Map<String, String>?) {
+    override fun onScreen(activity: Activity, path: String, title: String?, params: Map<String, String>?) {
       // do nothing.
     }
   }
@@ -83,8 +84,8 @@ internal object AnalyticsFactory {
       items.forEach { it.onEvent(name, params) }
     }
 
-    override fun onScreen(path: String, title: String, params: Map<String, String>?) {
-      items.forEach { it.onScreen(path, title, params) }
+    override fun onScreen(activity: Activity, path: String, title: String?, params: Map<String, String>?) {
+      items.forEach { it.onScreen(activity, path, title, params) }
     }
   }
 
