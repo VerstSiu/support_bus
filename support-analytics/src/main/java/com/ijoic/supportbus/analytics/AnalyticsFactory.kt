@@ -47,12 +47,11 @@ internal object AnalyticsFactory {
    * @param context context.
    */
   internal fun getAnalytics(context: Context): Analytics {
-    var instance = analyticsCache[context]
+    val appContext = context.applicationContext
+    var instance = analyticsCache[appContext]
     val creatorItems = this.creatorItems
 
     if (instance == null && !creatorItems.isEmpty()) {
-      val appContext = context.applicationContext
-
       instance = if (creatorItems.size == 1) {
         creatorItems.first().invoke(appContext)
       } else {

@@ -47,7 +47,6 @@ val Fragment.analytics: Analytics?
  */
 fun Analytics.onEvent(name: String, pair: Pair<String, String>) {
   this.onEvent(name, mapOf(pair))
-  this.onEvent(name, mapOf("" to "", "" to ""))
 }
 
 /**
