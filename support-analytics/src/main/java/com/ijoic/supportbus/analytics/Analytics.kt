@@ -35,4 +35,14 @@ interface Analytics {
    * Screen event with [activity], [path], [title] and [params]
    */
   fun onScreen(activity: Activity, path: String, title: String? = null, params: Map<String, String>? = null)
+
+  /**
+   * Bind [userId]
+   */
+  fun onBindUserId(userId: String) {}
+
+  /**
+   * Unbind userId
+   */
+  fun onUnbindUserId() {}
 }
