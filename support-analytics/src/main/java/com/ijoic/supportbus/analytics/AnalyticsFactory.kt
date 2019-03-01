@@ -86,6 +86,14 @@ internal object AnalyticsFactory {
     override fun onScreen(activity: Activity, path: String, title: String?, params: Map<String, String>?) {
       items.forEach { it.onScreen(activity, path, title, params) }
     }
+
+    override fun onBindUserId(userId: String) {
+      items.forEach { it.onBindUserId(userId) }
+    }
+
+    override fun onUnbindUserId() {
+      items.forEach { it.onUnbindUserId() }
+    }
   }
 
 }
