@@ -18,6 +18,7 @@
 package com.ijoic.supportbus.analytics
 
 import android.app.Activity
+import android.content.Context
 
 /**
  * Analytics.
@@ -37,12 +38,12 @@ interface Analytics {
   fun onScreen(activity: Activity, path: String, title: String? = null, params: Map<String, String>? = null)
 
   /**
-   * Bind [userId]
+   * Bind [userId] with [context]
    */
-  fun onBindUserId(userId: String) {}
+  fun onBindUserId(context: Context, userId: String) {}
 
   /**
-   * Unbind userId
+   * Unbind userId with [context]
    */
-  fun onUnbindUserId() {}
+  fun onUnbindUserId(context: Context) {}
 }
