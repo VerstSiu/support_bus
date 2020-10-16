@@ -21,7 +21,7 @@
 package com.ijoic.supportbus.analytics
 
 import android.content.Context
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 
 /**
  * Analytics instance.
