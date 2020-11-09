@@ -35,7 +35,21 @@ interface Analytics {
   /**
    * Screen event with [activity], [path], [title] and [params]
    */
-  fun onScreen(activity: Activity, path: String, title: String? = null, params: Map<String, String>? = null)
+  @Deprecated(message = "use register + screen as replace")
+  fun onScreen(activity: Activity, path: String, title: String? = null, params: Map<String, String>? = null) {
+    register(activity)
+    screen(activity, path, title, params)
+  }
+
+  /**
+   * Register analytics to [activity]
+   */
+  fun register(activity: Activity) {}
+
+  /**
+   * Screen event with [activity], [path], [title] and [params]
+   */
+  fun screen(activity: Activity, path: String, title: String? = null, params: Map<String, String>? = null) {}
 
   /**
    * Bind [userId] with [context]
