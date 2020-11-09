@@ -1,6 +1,6 @@
 {
   "name": "support_bus",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "description": "[![](https://jitpack.io/v/VerstSiu/support_bus.svg)](https://jitpack.io/#VerstSiu/support_bus)",
   "main": "index.js",
   "scripts": {
