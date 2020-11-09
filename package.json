@@ -1,0 +1,23 @@
+{
+  "name": "support_bus",
+  "version": "1.0.0",
+  "description": "[![](https://jitpack.io/v/VerstSiu/support_bus.svg)](https://jitpack.io/#VerstSiu/support_bus)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VerstSiu/support_bus.git"
+  },
+  "author": "verstsiu",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/VerstSiu/support_bus/issues"
+  },
+  "homepage": "https://github.com/VerstSiu/support_bus#readme",
+  "private": true,
+  "devDependencies": {
+    "standard-version": "^9.0.0"
+  }
+}
