@@ -6,7 +6,7 @@ buildscript {
         minSdkVersion = 15
         targetSdkVersion = 29
         versionCode = 1
-        versionName = "1.0.1-alpha.2"
+        versionName = "1.1.0-alpha.0"
 
         junit_version = "4.13"
         kotlin_version = '1.4.10'
