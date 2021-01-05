@@ -33,6 +33,11 @@ interface Analytics {
   fun onEvent(name: String, params: Map<String, String>? = null)
 
   /**
+   * Trace event with [path], [category], [action], [name] and [value]
+   */
+  fun onTrack(path: String? = null, category: String, action: String, name: String, value: Float? = null) {}
+
+  /**
    * Screen event with [activity], [path], [title] and [params]
    */
   @Deprecated(message = "use register + screen as replace")

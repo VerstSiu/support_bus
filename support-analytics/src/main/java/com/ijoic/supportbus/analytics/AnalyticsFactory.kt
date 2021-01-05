@@ -83,6 +83,10 @@ internal object AnalyticsFactory {
       items.forEach { it.onEvent(name, params) }
     }
 
+    override fun onTrack(path: String?, category: String, action: String, name: String, value: Float?) {
+      items.forEach { it.onTrack(path, category, action, name, value) }
+    }
+
     override fun onScreen(activity: Activity, path: String, title: String?, params: Map<String, String>?) {
       items.forEach { it.onScreen(activity, path, title, params) }
     }
