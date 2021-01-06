@@ -87,8 +87,12 @@ internal object AnalyticsFactory {
       items.forEach { it.onTrack(path, category, action, name, value) }
     }
 
-    override fun onScreen(activity: Activity, path: String, title: String?, params: Map<String, String>?) {
-      items.forEach { it.onScreen(activity, path, title, params) }
+    override fun register(activity: Activity) {
+      items.forEach { it.register(activity) }
+    }
+
+    override fun screen(activity: Activity, path: String, title: String?, params: Map<String, String>?) {
+      items.forEach { it.screen(activity, path, title, params) }
     }
 
     override fun onBindUserId(context: Context, userId: String) {
